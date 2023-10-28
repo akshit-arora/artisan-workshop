@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Http\Livewire\Hooks\Sidebar\Start;
 use Filament\Facades\Filament;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class ProjectServiceProvider extends ServiceProvider
 {
@@ -23,9 +25,11 @@ class ProjectServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Livewire::component('hooks.sidebar.start', Start::class);
+
         // Register the resource
         FilamentView::registerRenderHook(
-            'panels::resource.pages.list-records.table.before',
+            'panels::sidebar.nav.start',
             fn (): string => Blade::render('@livewire(\'hooks.sidebar.start\')'),
         );
 

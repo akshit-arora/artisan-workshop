@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Hooks\Sidebar;
+namespace App\Livewire\Hooks\Sidebar;
 
 use Filament\Notifications\Notification;
 use Livewire\Component;
