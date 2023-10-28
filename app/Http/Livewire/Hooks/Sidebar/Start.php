@@ -2,24 +2,53 @@
 
 namespace App\Http\Livewire\Hooks\Sidebar;
 
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 class Start extends Component
 {
-    public $selectedProject = '';
+    public $selectedProject = null;
+    public $projects = null;
 
     protected $listeners = [
         'projectCreated' => '$refresh',
         'projectUpdated' => '$refresh',
     ];
 
+    /**
+     * Create a new component instance.
+     */
+    public function __construct()
+    {
+        $this->selectedProject = session('selected_project') ? session('selected_project')->id : null;
+    }
+
+    /**
+     * Render the component.
+     */
     public function render()
     {
         // Get all the active projects
-        $projects = \App\Models\Project::where('status', 'active')->get();
+        $this->projects = \App\Models\Project::where('status', 'active')->get();
 
         return view('livewire.hooks.sidebar.start', [
-            'projects' => $projects,
+            'projects' => $this->projects,
         ]);
+    }
+
+    /**
+     * Set the selected project
+     */
+    public function setProject($project)
+    {
+        $this->selectedProject = $project;
+        $project = $this->projects->where('id', $project)->first();
+
+        session()->put('selected_project', $project);
+
+        Notification::make()
+            ->title('Project ' . $project->name . ' selected')
+            ->success()
+            ->send();
     }
 }
