@@ -6,8 +6,10 @@ Welcome to the Artisan Workshop. This is a project to create a dashboard for Lar
 ## Roadmap
 
 * :ballot_box_with_check: Set up Filament Base
-* :black_square_button: Create Projects module
-* :black_square_button: Load Projects on Sidebar/Top Nav. Load the selection in session
+* :ballot_box_with_check: Create Projects module
+* :ballot_box_with_check: Load Projects on Sidebar/Top Nav. Load the selection in session
+* :ballot_box_with_check: Create Dashboard for loaded project
+* :black_square_button: Create Sample To-do list
 * :black_square_button: Create Plugin system
 * :black_square_button: Create plugins Manager
 * :black_square_button: Ability to Import/Export Workshop settings

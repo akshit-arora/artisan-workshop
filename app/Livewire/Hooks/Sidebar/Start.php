@@ -46,9 +46,18 @@ class Start extends Component
 
         session()->put('selected_project', $project);
 
+        if (is_null($project)) {
+            return;
+        }
+
         Notification::make()
             ->title('Project ' . $project->name . ' selected')
             ->success()
             ->send();
+
+        $this->dispatch('projectSelected');
+
+        // Redirect to dashboard
+        return redirect()->route('filament.admin.pages.dashboard');
     }
 }

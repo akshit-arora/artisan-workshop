@@ -24,7 +24,7 @@ class EditProject extends EditRecord
 
     protected function afterSave(): void
     {
-        $this->emit('projectUpdated');
+        $this->dispatch('projectUpdated');
     }
 
 }

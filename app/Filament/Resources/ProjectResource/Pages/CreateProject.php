@@ -17,6 +17,6 @@ class CreateProject extends CreateRecord
 
     protected function afterCreate(): void
     {
-        $this->emit('projectCreated');
+        $this->dispatch('projectCreated');
     }
 }
