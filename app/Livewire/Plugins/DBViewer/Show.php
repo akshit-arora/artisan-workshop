@@ -10,15 +10,19 @@ use Livewire\WithPagination;
 
 class Show extends Component
 {
-    #[Title('Show Table Data')]
+    use WithPagination;
 
     public $tableName;
-    public $tableNames;
     public $tableData;
     public $project;
     public $where = null;
 
-    public function mount(string $tableName)
+    public function updatingWhere()
+    {
+        $this->resetPage();
+    }
+
+    public function mount(?string $tableName = null)
     {
         $this->tableName = $tableName;
     }
@@ -31,20 +35,22 @@ class Show extends Component
 
         $this->project = Session::get('project');
 
-        $service = new DBService();
+        $columns = $rows = [];
 
-        $this->tableNames = $service->setProject($this->project)->getTableNames($this->project);
+        if ($this->tableName != null) {
+            $service = new DBService();
 
-        $service->table($this->tableName);
+            $service->setProject($this->project)->table($this->tableName);
 
-        $columns = $service->columns();
-        $rows = $service->where($this->where)->get();
+            $columns = $service->columns();
+            $rows = $service->where($this->where)->get();
+        }
 
         return view('livewire.plugins.d-b-viewer.show', compact('columns', 'rows'));
     }
 
     public function refresh()
     {
-        $this->dispatch('$refresh');
+        $this->resetPage();
     }
 }

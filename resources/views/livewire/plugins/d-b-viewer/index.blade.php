@@ -2,29 +2,30 @@
     <h2 class="text-2xl">
         Database Viewer for {{ $project->name }}
     </h2>
-    <label class="input input-bordered flex items-center gap-2 mt-4">
-        Search for table
-        <input type="text" wire:model.live="search" class="grow" placeholder="Table name here...">
-    </label>
-
-    <table class="table table-zebra">
-        <thead>
-            <tr>
-                <th>
-                    Table name
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($tableNames as $table)
-                <tr class="hover">
-                    <td>
-                        <a href="{{ route('db-viewer.show', $table) }}" class="w-full" wire:navigate>
-                            {{ $table }}
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="grid grid-cols-4 mt-4">
+        <div>
+            <input type="text" wire:model.live="search" class="input input-bordered w-full max-w-xs" placeholder="Search for table">
+            <table class="table table-zebra table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            Table name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($tableNames as $table)
+                        <tr class="hover" wire:click="setTable('{{ $table }}')">
+                            <td>
+                                {{ $table }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="col-span-3">
+            @livewire('plugins.d-b-viewer.show', ['tableName' => $tableName], key(time() . rand(0, 999)))
+        </div>
+    </div>
 </div>

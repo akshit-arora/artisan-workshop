@@ -94,7 +94,6 @@ class DBService
             $columnNames = Arr::pluck($columns, 'name');
         } elseif ($this->dbType == 'mysql') {
             $columnNames = $db->select('SHOW COLUMNS FROM ' . $this->tableName);
-            // $columnNames = $db->getSchemaBuilder()->getColumnListing($this->tableName);
             $columnNames = Arr::pluck($columnNames, 'Field');
         }
 
@@ -110,7 +109,7 @@ class DBService
                 $db->whereRaw($this->where);
             }
 
-            return $db->offset($this->offset)->limit($this->limit)->get();
+            return $db->paginate($this->limit);
         } catch (Exception $e) {
             $this->where = '';
 

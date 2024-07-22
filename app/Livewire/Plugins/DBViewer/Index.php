@@ -17,9 +17,9 @@ class Index extends Component
     #[Title('Database Viewer')]
 
     public $project = null;
-    private $envReader;
     public $tableNames;
     public $search;
+    public $tableName;
 
     private function loadTables()
     {
@@ -28,8 +28,6 @@ class Index extends Component
         $service = new DBService();
 
         return $service->setProject($this->project)->getTableNames($this->project);
-
-        // return $tableNames;
     }
 
     public function render()
@@ -47,5 +45,11 @@ class Index extends Component
         }
 
         return view('livewire.plugins.d-b-viewer.index');
+    }
+
+    public function setTable(string $tableName)
+    {
+        $this->tableName = $tableName;
+        $this->dispatch('$refresh');
     }
 }
