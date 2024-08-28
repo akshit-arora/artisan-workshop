@@ -8,28 +8,59 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+/**
+ * Class Create
+ * Livewire component for creating a project
+ * 
+ * @package App\Livewire\Project
+ */
 class Create extends Component
 {
+    /**
+     * Create a new project
+     */
     #[Title('Create Project')]
 
+    /**
+     * The name of the project
+     */
     #[Validate('required|string|max:255')]
     public $name;
 
+    /**
+     * The description of the project
+     */
     #[Validate('nullable|string|max:255')]
     public $description;
 
+    /**
+     * The location of the project
+     */
     #[Validate(['required', 'string', 'max:255', new ValidPath()])]
     public $location;
 
+    /**
+     * The status of the project
+     */
     #[Validate(['required', 'string', 'in:active,inactive'])]
     public $status = 'active';
 
-    public function render()
+    /**
+     * Render the component
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.project.create');
     }
 
-    public function save()
+    /**
+     * Save the new project
+     * 
+     * @return void
+     */
+    public function save(): void
     {
         $this->validate();
 
@@ -40,6 +71,6 @@ class Create extends Component
             'status' => $this->status,
         ]);
 
-        return $this->redirect(route('projects.index'), navigate: true);
+        $this->redirect(route('projects.index'), navigate: true);
     }
 }

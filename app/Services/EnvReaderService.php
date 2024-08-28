@@ -4,8 +4,17 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\File;
 
+/**
+ * Class EnvReaderService
+ * Service for reading .env files
+ * 
+ * @package App\Services
+ */
 class EnvReaderService
 {
+    /**
+     * Get the .env file from the path
+     */
     public function get(string $path, string|array $key): string|array
     {
         // Get the .env file from the path
@@ -14,8 +23,6 @@ class EnvReaderService
         if (substr($path, -1) !== '/' && substr($path, -1) !== '\\') {
             $path .= '/';
         }
-
-        // dd($path . '.env');
 
         if (!File::exists($path . '.env')) {
             throw new \InvalidArgumentException('The .env file does not exist.');
