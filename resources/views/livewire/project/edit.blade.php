@@ -24,6 +24,6 @@
         </label>
         <div>@error('status') {{ $message }} @enderror</div>
         <button type="submit" class="mt-2 btn btn-primary">Update</button>
-        <a href="{{ route('projects.index') }}" wire:navigate class="mt-2 ml-2 btn">Cancel</a>
+        <a href="{{ route('projects.index') }}" wire:navigate class="mt-2 ml-2 btn btn-secondary">Cancel</a>
     </form>
 </div>

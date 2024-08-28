@@ -29,5 +29,13 @@
         <footer class="border-t border-base-300 p-4 text-center mt-auto bg-base-100">
             <p class="">Your own Workshop.</p>
         </footer>
+        <!-- Toasts -->
+        @session('status')
+            <div class="toast">
+                <div class="alert alert-info">
+                    <span>{{ session('notification') }}</span>
+                </div>
+            </div>
+        @endsession
     </body>
 </html>

@@ -4,7 +4,6 @@ namespace App\Livewire\Project;
 
 use App\Models\Project;
 use App\Rules\ValidPath;
-use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
