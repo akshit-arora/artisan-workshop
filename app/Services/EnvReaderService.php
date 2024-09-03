@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\File;
 /**
  * Class EnvReaderService
  * Service for reading .env files
- * 
+ *
  * @package App\Services
  */
 class EnvReaderService
 {
     /**
-     * Get the .env file from the path
+     * Get the values from the .env file
      */
     public function get(string $path, string|array $key): string|array
     {
